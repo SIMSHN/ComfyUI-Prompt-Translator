@@ -75,12 +75,12 @@ class PromptTextTranslation:
         print("prompt: ", text_trans, text_normal)
 
         if trans_switch == "enabled" :
-            if targe_lang == "英语" :
-                target_text = translate(text_trans,"en_XX",original_lang)
-            else:
-                target_text = translate(text_trans,"zh_CN",original_lang)
-        else:
-            target_text = text_trans.replace(", ", ",").replace(". ", ".").replace("， ", "，").replace("。 ", "。").lower()
+                if targe_lang == "英语" :
+                    target_text = translate(text_trans,"en_XX",original_lang)
+                else:
+                    target_text = translate(text_trans,"zh_CN",original_lang)
+        else :
+            target_text = text_trans
             
         
         
