@@ -11,7 +11,10 @@ tokenizer = MBart50TokenizerFast.from_pretrained("facebook/mbart-large-50-many-t
 def translate(text,targe,original_lang):
     try:
         if original_lang == "中文" :
-            tokenizer.src_lang = "zh_CN"
+            if contains_chinese(text) :
+                tokenizer.src_lang = "zh_CN"
+            else:
+                return text
         else:
             tokenizer.src_lang = "en_XX"
         
@@ -62,11 +65,11 @@ class PromptTextTranslation:
         print("prompt: ", text_trans, text_normal)
 
         if trans_switch == "enabled" :
-            if targe_lang == "英语" :
-                target_text = translate(text_trans,"en_XX",original_lang)
-            else:
-                target_text = translate(text_trans,"zh_CN",original_lang)
-        else:
+                if targe_lang == "英语" :
+                    target_text = translate(text_trans,"en_XX",original_lang)
+                else:
+                    target_text = translate(text_trans,"zh_CN",original_lang)
+        else :
             target_text = text_trans
             
         
