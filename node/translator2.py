@@ -11,7 +11,10 @@ tokenizer = MBart50TokenizerFast.from_pretrained("facebook/mbart-large-50-many-t
 def translate(text,targe,original_lang):
     try:
         if original_lang == "中文" :
-            tokenizer.src_lang = "zh_CN"
+            if contains_chinese(text) :
+                tokenizer.src_lang = "zh_CN"
+            else:
+                return text
         else:
             tokenizer.src_lang = "en_XX"
         
